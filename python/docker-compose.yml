@@ -1,0 +1,17 @@
+name: hack
+services:
+  database:
+    image: mongo:latest
+    ports:
+      - '27017:27017'    
+
+  server:
+    build: .
+    environment:
+      PORT: 5000
+      MONGO_URI: mongodb://database:27017
+    ports:
+      - "5000:5000"
+    depends_on:
+      - database
+    
